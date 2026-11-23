@@ -54,34 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* =====================================
-       MOBILE NAVIGATION
-    ===================================== */
-    const menuToggle = document.getElementById("menuToggle");
-    const navMenu = document.getElementById("navMenu");
-
-    if (menuToggle && navMenu) {
-        const setMenuState = (open) => {
-            navMenu.classList.toggle("open", open);
-            menuToggle.setAttribute("aria-expanded", String(open));
-        };
-
-        menuToggle.addEventListener("click", (e) => {
-            e.stopPropagation();
-            setMenuState(!navMenu.classList.contains("open"));
-        });
-
-        navMenu.querySelectorAll("a").forEach(link => {
-            link.addEventListener("click", () => setMenuState(false));
-        });
-
-        document.addEventListener("click", (event) => {
-            if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-                setMenuState(false);
-            }
-        });
-    }
-
-    /* =====================================
        STATS COUNTER
     ===================================== */
     const statNumbers = document.querySelectorAll(".stat-number[data-count]");
@@ -289,3 +261,90 @@ document.addEventListener("DOMContentLoaded", () => {
     fac = fac === 10 ? 11 : 10;
     document.getElementById('facultyCount').innerText = fac;
   }, 4000);
+
+
+
+
+
+/* =========================================
+   MOBILE NAVIGATION TOGGLE
+========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navMenu = document.querySelector(".nav-menu");
+
+    if (!menuToggle || !navMenu) return;
+
+    // Ensure menu starts closed
+    navMenu.classList.remove("open");
+    menuToggle.classList.remove("active");
+
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
+
+    // Open and close menu
+    menuToggle.addEventListener("click", () => {
+
+        const isOpen = navMenu.classList.toggle("open");
+
+        menuToggle.classList.toggle("active", isOpen);
+
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Close navigation menu" : "Open navigation menu"
+        );
+
+    });
+
+    // Close menu when a navigation link is clicked
+    navMenu.querySelectorAll(".nav-link").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navMenu.classList.remove("open");
+            menuToggle.classList.remove("active");
+
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute("aria-label", "Open navigation menu");
+
+        });
+
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (event) => {
+
+        if (
+            !navMenu.contains(event.target) &&
+            !menuToggle.contains(event.target)
+        ) {
+
+            navMenu.classList.remove("open");
+            menuToggle.classList.remove("active");
+
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute("aria-label", "Open navigation menu");
+
+        }
+
+    });
+
+    // Close menu when returning to desktop screen size
+    window.addEventListener("resize", () => {
+
+        if (window.innerWidth > 850) {
+
+            navMenu.classList.remove("open");
+            menuToggle.classList.remove("active");
+
+            menuToggle.setAttribute("aria-expanded", "false");
+
+        }
+
+    });
+
+});
