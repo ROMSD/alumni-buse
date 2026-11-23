@@ -2109,3 +2109,200 @@ button {
 
   @media(max-width:900px){ .stats-section{ grid-template-columns:repeat(2,1fr);} }
   @media(max-width:500px){ .stats-section{ grid-template-columns:1fr;} }
+
+
+
+
+/* =========================================
+   FINAL NAVIGATION FIX
+   Desktop and Mobile
+========================================= */
+
+/* Navbar positioning */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--white);
+}
+
+.navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 82px;
+}
+
+/* Desktop menu */
+.nav-menu {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 22px;
+    width: auto;
+    max-height: none;
+    padding: 0;
+    overflow: visible;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* Desktop toggle hidden */
+.menu-toggle {
+    display: none;
+}
+
+/* Navigation links */
+.nav-link {
+    display: inline-block;
+    width: auto;
+    padding: 8px 0;
+}
+
+/* =========================================
+   MOBILE NAVIGATION
+========================================= */
+
+@media (max-width: 850px) {
+
+    .navbar {
+        min-height: 75px;
+        flex-wrap: nowrap;
+    }
+
+    /* Show hamburger */
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--white);
+        cursor: pointer;
+        flex-shrink: 0;
+        z-index: 1002;
+    }
+
+    .menu-toggle span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        margin: 0;
+        background: var(--green);
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Hamburger animation */
+    .menu-toggle.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Closed menu */
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        width: 100%;
+        max-height: calc(100dvh - 75px);
+        padding: 15px 5% 25px;
+        overflow-y: auto;
+        background: var(--white);
+        border-top: 1px solid var(--border);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.08);
+        z-index: 1001;
+    }
+
+    /* Open menu */
+    .nav-menu.open {
+        display: flex;
+    }
+
+    .nav-link {
+        display: block;
+        width: 100%;
+        padding: 13px 0;
+        font-size: 16px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    /* Navigation actions */
+    .nav-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 12px;
+        width: 100%;
+        margin-top: 15px;
+        padding-top: 18px;
+        border-top: 1px solid var(--border);
+    }
+
+    .nav-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-language {
+        align-self: flex-start;
+        margin-top: 12px;
+    }
+}
+
+/* Smaller mobile screens */
+@media (max-width: 600px) {
+
+    .navbar {
+        min-height: 70px;
+    }
+
+    .logo {
+        width: 65px;
+        height: 65px;
+    }
+
+    .brand-text strong {
+        font-size: 19px;
+    }
+
+    .nav-menu {
+        max-height: calc(100dvh - 70px);
+    }
+}
+
+/* Keyboard accessibility */
+.menu-toggle:focus-visible,
+.nav-link:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 4px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .menu-toggle span {
+        transition: none;
+    }
+}
+
