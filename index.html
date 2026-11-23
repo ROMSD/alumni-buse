@@ -15,11 +15,22 @@
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/events.css">
     <link rel="stylesheet" href="doc.html">
-</head>
-<body>
-    <header class="header">
 
-         <!-- Mobile Menu Button -->
+<header class="header">
+    <nav class="navbar container" aria-label="Primary Navigation">
+
+        <!-- University Branding -->
+        <a href="#home" class="brand">
+            <div class="logo">
+                <img src="assets/images/logo.png"
+                     alt="Bindura University of Science Education logo">
+            </div>
+            <div class="brand-text">
+                <strong>ALUMNI</strong>
+            </div>
+        </a>
+
+        <!-- Mobile Menu Toggle -->
         <button
             class="menu-toggle"
             id="menuToggle"
@@ -32,50 +43,41 @@
             <span></span>
             <span></span>
         </button>
-        <nav class="navbar container" aria-label="Primary Navigation">
-            <a href="#home" class="brand">
-                <div class="logo">
-                    <img src="assets/images/logo.png" alt="Bindura University of Science Education logo">
-                </div>
-                <div class="brand-text">
-                    <strong>ALUMNI</strong>
-                </div>
-            </a>
 
-            <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-controls="navMenu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+        <!-- Navigation Menu -->
+        <div class="nav-menu" id="navMenu">
 
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#gallery" class="nav-link">Gallery</a>
+            <a href="#voices" class="nav-link">Events</a>
+            <a href="#careers" class="nav-link">Careers</a>
 
-            <div class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#gallery" class="nav-link">Gallery</a>
-                <a href="#voices" class="nav-link">Events</a>
-                <a href="#careers" class="nav-link">Careers</a>
+            <!-- Language Selector -->
+            <div class="nav-language">
+                <div class="gtranslate_wrapper"></div>
+            </div>
 
-                <!-- Language Selector -->
-                <div class="nav-language">
-                       <div class="gtranslate_wrapper"></div>
-                </div>
+            <!-- Navigation Actions -->
+            <div class="nav-actions">
+                <a href="https://portal.buse.ac.zw/"
+                   class="btn btn-primary nav-register"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Log in
+                </a>
 
+                <a href="https://portal.buse.ac.zw/alumni_account"
+                   class="btn btn-primary nav-register"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    Join Network
+                </a>
+            </div>
 
-                <!-- Navigation Actions -->
-                <div class="nav-actions">
-                    <a href="https://portal.buse.ac.zw/" class="btn btn-primary nav-register" target="_blank">
-                        Log in
-                    </a>
-
-                    <a href="https://portal.buse.ac.zw/alumni_account" class="btn btn-primary nav-register" target="_blank">
-                        Join Network
-                    </a>
-              </div>
-           </div>
-        </nav>
-    </header>
-
+        </div>
+    </nav>
+</header>
     <main>
         <!-- HERO -->
         <section class="hero" id="home">
