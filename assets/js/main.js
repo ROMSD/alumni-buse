@@ -266,29 +266,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
 /* =========================================
    MOBILE NAVIGATION TOGGLE
 ========================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
-
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navMenu = document.querySelector(".nav-menu");
+(() => {
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
 
     if (!menuToggle || !navMenu) return;
 
-    // Ensure menu starts closed
-    navMenu.classList.remove("open");
-    menuToggle.classList.remove("active");
+    const mobileBreakpoint = window.matchMedia("(max-width: 850px)");
 
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Open navigation menu");
-
-    // Open and close menu
-    menuToggle.addEventListener("click", () => {
-
-        const isOpen = navMenu.classList.toggle("open");
-
+    // Update menu and button state together
+    function setMenuState(isOpen) {
+        navMenu.classList.toggle("open", isOpen);
         menuToggle.classList.toggle("active", isOpen);
 
         menuToggle.setAttribute("aria-expanded", String(isOpen));
@@ -297,8 +290,57 @@ document.addEventListener("DOMContentLoaded", () => {
             "aria-label",
             isOpen ? "Close navigation menu" : "Open navigation menu"
         );
+    }
 
+    // Toggle menu when hamburger is clicked
+    menuToggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        const isOpen = navMenu.classList.contains("open");
+
+        setMenuState(!isOpen);
     });
+
+    // Close menu after selecting a navigation link
+    navMenu.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", () => {
+            if (mobileBreakpoint.matches) {
+                setMenuState(false);
+            }
+        });
+    });
+
+    // Close menu when clicking outside navigation
+    document.addEventListener("click", (event) => {
+        if (!mobileBreakpoint.matches) return;
+
+        const clickedInsideMenu = navMenu.contains(event.target);
+        const clickedToggle = menuToggle.contains(event.target);
+
+        if (!clickedInsideMenu && !clickedToggle) {
+            setMenuState(false);
+        }
+    });
+
+    // Close menu using Escape key
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && navMenu.classList.contains("open")) {
+            setMenuState(false);
+            menuToggle.focus();
+        }
+    });
+
+    // Reset menu when moving back to desktop
+    mobileBreakpoint.addEventListener("change", (event) => {
+        if (!event.matches) {
+            setMenuState(false);
+        }
+    });
+
+    // Initial state
+    setMenuState(false);
+
+})();
 
     // Close menu when a navigation link is clicked
     navMenu.querySelectorAll(".nav-link").forEach(link => {
